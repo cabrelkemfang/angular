@@ -1,0 +1,98 @@
+<div class="container">
+
+    <mat-card>
+  
+      <form [formGroup]="addFamilyMember" (ngSubmit)="submit()">
+  
+        <mat-card-content>
+  
+          <div fxLayout="row wrap" fxLayoutGap="2%" fxLayout.lt-md="column">
+  
+            <mat-form-field fxFlex="48%">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstname">
+            </mat-form-field>
+  
+            <mat-form-field fxFlex="48%">
+              <mat-label>Middle Name</mat-label>
+              <input matInput formControlName="middlename">
+            </mat-form-field>
+  
+            <mat-form-field fxFlex="48%">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastname">
+            </mat-form-field>
+  
+            <mat-form-field fxFlex="48%">
+              <mat-label>Qualification</mat-label>
+              <input matInput formControlName="qualification">
+            </mat-form-field>
+  
+            <mat-form-field fxFlex="48%">
+              <mat-label>Mobile Number</mat-label>
+              <input matInput formControlName="mobilenumber">
+            </mat-form-field>
+  
+            <mat-form-field fxFlex="48%">
+              <mat-label>Age</mat-label>
+              <input matInput formControlName="age">
+            </mat-form-field>
+
+            <mat-form-field fxFlex="48%">
+                <mat-label>is Dependent</mat-label>
+                <mat-select formControlName="dependent">
+                  <mat-option *ngFor="let dependentValue of dependentValues" [value]="dependentValue">
+                  {{dependentValue}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="48%">
+              <mat-label>Relationship</mat-label>
+              <input matInput formControlName="relationship" ngModel>
+            </mat-form-field>
+            
+            <mat-form-field fxFlex="48%">
+              <mat-label>Marital Status</mat-label>
+              <mat-select formControlName="maritalStatus">
+                <mat-option *ngFor="let maritalstatus of maritalStatusData" [value]="maritalstatus">
+                  {{maritalstatus}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="48%">
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName="Gender">
+                  <mat-option *ngFor="let gender of genderData" [value]="gender">
+                  {{gender}}
+                  </mat-option>
+                </mat-select>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="48%">
+              <mat-label>Profession</mat-label>
+              <input matInput formControlName="profession"  ngModel>
+            </mat-form-field>
+
+            
+            <mat-form-field fxFlex="48%">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dob">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+  
+          </div>
+  
+        </mat-card-content>
+        <mat-card-actions fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" > 
+          <button mat-raised-button color="primary">Create</button>
+        </mat-card-actions>
+       
+  
+      </form>
+  
+    </mat-card>
+  
+  </div>
