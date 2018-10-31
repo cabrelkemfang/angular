@@ -96,10 +96,8 @@ export class AddFamilyMemberComponent implements OnInit {
     familyMember.isDependent = this.disableSelect.value;
 
     familyMember.clientId = this.id;
-    console.log(familyMember);
-
     this.clientService.createFamilyMember(familyMember, this.id).subscribe(response => {
-      this.router.navigate(['../../family-members', response.clientId], { relativeTo: this.route });
+      this.router.navigate(['/clients/view/' + this.id]);
     });
   }
 }

@@ -369,5 +369,20 @@ export class ClientsService {
         )
       );
   }
+
+  getFamillyMember(id: number) {
+    const headers = new Headers(); // tslint:disable-line
+    this.createAuthorizationHeader(headers);
+    return this.http.get('https://demo.openmf.org/fineract-provider/api/v1/clients/' + id + '/familymembers?tenantIdentifier=default&pretty=true', {
+      headers: headers
+    })
+      .pipe(
+        map(
+          (response: Response) => { // tslint:disable-line
+            return response.json();
+          }
+        )
+      );
+  }
 }
 
