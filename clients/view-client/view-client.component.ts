@@ -35,19 +35,21 @@ export class ViewClientComponent implements OnInit, OnDestroy {
   displayedSharesColumns = ['account', 'shareAccount', 'approvedShares', 'pending'];
   displayedIdentifierColumns = ['id', 'description', 'type', 'status', 'actions'];
   displayedDocumentColumns = ['name', 'description', 'filename', 'actions'];
-
+  displayedFamilyMenberColumns = ['firstName', 'lastName', 'middleName', 'qualification', 'mobileNumber', 'age', 'isDependent', 'maritalStatus', 'gender', 'profession', 'dateOfBirth'];
+  famillyMenberData: any;
   dataSourceLoan = new MatTableDataSource([]);
   dataSourceSavings = new MatTableDataSource([]);
   dataSourceShares = new MatTableDataSource([]);
   dataSourceIdentifiers = new MatTableDataSource([]);
   dataSourceDocuments = new MatTableDataSource([]);
+  dataSource = new MatTableDataSource();
 
   @ViewChild('f') noteForm: NgForm;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private route: ActivatedRoute, private clientService: ClientsService,
-              private router: Router, public dialog: MatDialog) {}
+    private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.paramsSubscription = this.route.params
@@ -64,6 +66,7 @@ export class ViewClientComponent implements OnInit, OnDestroy {
     this.getClientNotes(this.id);
     this.getClientIdentifier(this.id);
     this.getClientDocuments(this.id);
+    this.getFamillyMenber(this.id);
   }
 
   getClientId(id: any) {
@@ -162,8 +165,18 @@ export class ViewClientComponent implements OnInit, OnDestroy {
           this.dataSourceDocuments.sort = this.sort;
         })
       );
-
   }
+
+  getFamillyMenber(id: number) {
+    this.clientService.getFamillyMember(id).subscribe(
+      data => {
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    )
+  }
+
   onSubmit() {
     //  this.submitted = true;
     this.notes = {};
@@ -202,16 +215,15 @@ export class ViewClientComponent implements OnInit, OnDestroy {
       );
   }
 
-/*   openDialog() {
-    const dialogRef = this.dialog.open(ViewClientDialogComponent, {
-      height: '350px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
- */
+  /**   openDialog() {
+      const dialogRef = this.dialog.open(ViewClientDialogComponent, {
+        height: '350px'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+      }
+   */
   ngOnDestroy() {
     this.paramsSubscription.unsubscribe();
   }
@@ -219,41 +231,40 @@ export class ViewClientComponent implements OnInit, OnDestroy {
 }
 
 
-/*
-@Component({
-  selector: 'mifosx-view-client-component-dialog',
-  templateUrl: 'view-client-component-dialog.html',
-})
-export class ViewClientDialogComponent implements OnInit, OnDestroy {
+/** 
+      @Component({
+        selector: 'mifosx-view-client-component-dialog',
+        templateUrl: 'view-client-component-dialog.html',
+      })
+      export class ViewClientDialogComponent implements OnInit, OnDestroy {
 
-  paramsSubscription: Subscription;
-  id: any = undefined;
-  clientDocuments: any = undefined;
-  constructor(private route: ActivatedRoute, private clientService: ClientsService,
-    private router: Router, public dialog: MatDialog) {}
+        paramsSubscription: Subscription;
+        id: any = undefined;
+        clientDocuments: any = undefined;
+        constructor(private route: ActivatedRoute, private clientService: ClientsService,
+          private router: Router, public dialog: MatDialog) {}
 
-  ngOnInit() {
-    this.paramsSubscription = this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.id = params['id'];
-        }
-      );
-      this.getClientDocuments(this.id);
-    }
+        ngOnInit() {
+          this.paramsSubscription = this.route.params
+            .subscribe(
+              (params: Params) => {
+                this.id = params['id'];
+              }
+            );
+            this.getClientDocuments(this.id);
+          }
 
-    getClientDocuments(id: any) {
-      this.clientService.getClientDocuments(id)
-        .subscribe(
-          (res => {
-            this.clientDocuments = res;
-          })
-        );
-    }
+          getClientDocuments(id: any) {
+            this.clientService.getClientDocuments(id)
+              .subscribe(
+                (res => {
+                  this.clientDocuments = res;
+                })
+              );
+          }
 
-    ngOnDestroy() {
-      this.paramsSubscription.unsubscribe();
-    }
-
-}
- */
+          ngOnDestroy() {
+            this.paramsSubscription.unsubscribe();
+          }
+      }
+   */
