@@ -8,6 +8,7 @@ import { CoreModule } from '../core/core.module';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ArchwizardModule } from 'angular-archwizard';
+import { MatIconModule } from "@angular/material/icon";
 
 import { ClientsRoutingModule } from './clients-routing.module';
 import { ClientsComponent } from './clients.component';
@@ -20,7 +21,7 @@ import { CreateIdentityComponent } from './create-identity/create-identity.compo
 import { ClientsService } from './clients.service';
 import { UploadDocumentComponent } from './upload-document/upload-document.component';
 import { EditAddressComponent } from './edit-address/edit-address.component';
-import { AddFamilyMemberComponent } from './family-members/add-family-members/add-family-members.component';
+import { ListStandingInstructionsComponent } from './list-standing-instructions/list-standing-instructions.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { AddFamilyMemberComponent } from './family-members/add-family-members/ad
     HttpModule, 
     MatTableModule,
     ArchwizardModule,
+    MatIconModule,
   ],
   declarations: [
     ClientsComponent,
@@ -44,7 +46,7 @@ import { AddFamilyMemberComponent } from './family-members/add-family-members/ad
     CreateIdentityComponent,
     UploadDocumentComponent,
     EditAddressComponent,
-    AddFamilyMemberComponent
+    ListStandingInstructionsComponent
 ],
   providers: [
     ClientsService,

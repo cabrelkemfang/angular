@@ -15,7 +15,7 @@ import { CreateAddressComponent } from './create-address/create-address.componen
 import { CreateIdentityComponent } from './create-identity/create-identity.component';
 import { UploadDocumentComponent } from './upload-document/upload-document.component';
 import { EditAddressComponent } from './edit-address/edit-address.component';
-import { AddFamilyMemberComponent } from './family-members/add-family-members/add-family-members.component';
+import { ListStandingInstructionsComponent } from './list-standing-instructions/list-standing-instructions.component';
 
 const routes: Routes = [
   Route.withShell([
@@ -60,10 +60,11 @@ const routes: Routes = [
       data: { title: extract('Create Identity') }
     },
     {
-      path: 'clients/addfamilymembers/:id',
-      component: AddFamilyMemberComponent,
-      data: { title: extract('Add FamilyMembers') }
+      path: 'clients/liststandindinginstructions/:id',
+      component: ListStandingInstructionsComponent,
+      data: { title: extract('List Standing Instructions') }
     },
+    
   ])
 ];
 
